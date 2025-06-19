@@ -1,8 +1,10 @@
 extends CharacterBody3D
-var speed = 5.0
+
 var gravity = 30.0
 var jump = 10.0
 @export var mouse_sensitivity := 0.005
+@export var walk_speed := 5.0
+@export var sprint_speed := 8.5
 
 @onready var Camera_pivot: Node3D = $Camera_pivot
 
@@ -25,6 +27,10 @@ func _input(event: InputEvent):
 func _physics_process(delta: float) -> void:
 
 	var direction = Vector3.ZERO
+	
+	# Movement Speed
+	var speed = sprint_speed if Input.is_action_pressed("move_sprint") else walk_speed
+	
 	# Basic movement
 	if Input.is_action_pressed("move_forward"):
 		direction -= transform.basis.z
