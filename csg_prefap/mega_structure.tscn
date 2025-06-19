@@ -1,0 +1,74 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgvmnvh6mkl0a"]
+
+[ext_resource type="Script" uid="uid://d3pqcdrf2ieum" path="res://addons/proto-csgs/scripts/proto_csg_cylinder_3d.gd" id="1_87ug5"]
+[ext_resource type="PackedScene" uid="uid://dxuq1th4odqy0" path="res://csg_prefap/support_01.tscn" id="2_p5vk0"]
+
+[node name="Node3D3" type="Node3D"]
+transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 3.55271e-15, -8.35187e-23, 0, 1, 0, 0, 0)
+
+[node name="pos" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 3.55271e-15, -2.96718e-37, 1, -3.55271e-15, 8.35187e-23, 0, 1, 0, -3.05176e-05, 3.8147e-06)
+
+[node name="ProtoCSGCylinder3D2" type="CSGCylinder3D" parent="pos"]
+use_collision = true
+radius = 500.0
+height = 500.0
+sides = 32
+script = ExtResource("1_87ug5")
+metadata/_custom_type_script = "uid://d3pqcdrf2ieum"
+
+[node name="ProtoCSGCylinder3D5" type="CSGCylinder3D" parent="pos/ProtoCSGCylinder3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -260, 1.5)
+radius = 500.0
+height = 20.0
+sides = 32
+script = ExtResource("1_87ug5")
+metadata/_custom_type_script = "uid://d3pqcdrf2ieum"
+
+[node name="ProtoCSGCylinder3D4" type="CSGCylinder3D" parent="pos/ProtoCSGCylinder3D2/ProtoCSGCylinder3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 512, 303.5)
+radius = 300.0
+height = 1000.0
+sides = 32
+script = ExtResource("1_87ug5")
+metadata/_custom_type_script = "uid://d3pqcdrf2ieum"
+
+[node name="ProtoCSGCylinder3D3" type="CSGCylinder3D" parent="pos/ProtoCSGCylinder3D2/ProtoCSGCylinder3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 512, 303.5)
+operation = 2
+radius = 250.0
+height = 1000.0
+sides = 32
+script = ExtResource("1_87ug5")
+block_color = 3
+metadata/_custom_type_script = "uid://d3pqcdrf2ieum"
+
+[node name="ProtoCSGCylinder3D6" type="CSGCylinder3D" parent="pos/ProtoCSGCylinder3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1.5, 0.499996)
+operation = 2
+radius = 450.0
+height = 500.0
+sides = 32
+script = ExtResource("1_87ug5")
+block_color = 3
+metadata/_custom_type_script = "uid://d3pqcdrf2ieum"
+
+[node name="Node3D4" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 3.55271e-15, -2.96718e-37, 1, -3.55271e-15, 8.35187e-23, 0, 1, -0.5, 252, 305)
+
+[node name="Node3D" type="Node3D" parent="Node3D4"]
+
+[node name="support_01" parent="Node3D4/Node3D" instance=ExtResource("2_p5vk0")]
+transform = Transform3D(-15, 7.12122e-36, -7.54979e-06, 8.04666e-21, 24, -1.77636e-13, 2.26494e-06, -4.37205e-43, -50, -0.499992, -70, -338)
+
+[node name="Node3D2" type="Node3D" parent="Node3D4"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
+
+[node name="support_01" parent="Node3D4/Node3D2" instance=ExtResource("2_p5vk0")]
+transform = Transform3D(-15, 7.12122e-36, -7.54979e-06, 8.04666e-21, 24, -1.77636e-13, 2.26494e-06, -4.37205e-43, -50, -0.499992, -70, -338)
+
+[node name="Node3D3" type="Node3D" parent="Node3D4"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
+
+[node name="support_01" parent="Node3D4/Node3D3" instance=ExtResource("2_p5vk0")]
+transform = Transform3D(-15, 7.12122e-36, -7.54979e-06, 8.04666e-21, 24, -1.77636e-13, 2.26494e-06, -4.37205e-43, -50, -0.499992, -70, -338)

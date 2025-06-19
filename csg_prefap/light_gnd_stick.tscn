@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://csqo1ai5nuige"]
+
+[ext_resource type="Script" uid="uid://8jnpidc5r2sd" path="res://addons/proto-csgs/scripts/proto_csg_box_3d.gd" id="1_ebic4"]
+[ext_resource type="Material" uid="uid://crrg7mmjid7ig" path="res://materials/light.tres" id="2_mgoc7"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="ProtoCSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+size = Vector3(0.05, 1.5, 0.05)
+script = ExtResource("1_ebic4")
+block_color = 1
+metadata/_custom_type_script = "uid://8jnpidc5r2sd"
+
+[node name="ProtoCSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.525, 0)
+material_override = ExtResource("2_mgoc7")
+size = Vector3(0.1, 0.1, 0.1)
+script = ExtResource("1_ebic4")
+metadata/_custom_type_script = "uid://8jnpidc5r2sd"
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59977, 0)
+light_energy = 0.025
+omni_range = 6.0
