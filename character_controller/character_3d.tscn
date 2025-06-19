@@ -1,6 +1,75 @@
 [gd_scene load_steps=4 format=3 uid="uid://g23thsn2pjo4"]
 
-[ext_resource type="Script" uid="uid://clsn2a4db3f8i" path="res://character_controller/character_body_3d.gd" id="1_0cifh"]
+[sub_resource type="GDScript" id="GDScript_lrol0"]
+script/source = "extends CharacterBody3D
+
+var gravity = 30.0
+var jump = 10.0
+@export var mouse_sensitivity := 0.005
+@export var walk_speed := 5.0
+@export var sprint_speed := 8.5
+
+@onready var Camera_pivot: Node3D = $Camera_pivot
+
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+func _input(event: InputEvent):
+		if event is InputEventMouseMotion:
+			#Hor rotation
+			rotate_y(-event.relative.x * mouse_sensitivity)
+			
+			#Vert rotation
+			Camera_pivot.rotate_x(-event.relative.y * mouse_sensitivity)
+			
+			#Clamp vertical rotation to avoid flipping
+			var rot_deg = Camera_pivot.rotation_degrees
+			rot_deg.x = clamp(rot_deg.x, -60, 30)
+			Camera_pivot.rotation_degrees = rot_deg
+
+func _physics_process(delta: float) -> void:
+
+	var direction = Vector3.ZERO
+	
+	# Movement Speed
+	var speed = sprint_speed if Input.is_action_pressed(\"move_sprint\") else walk_speed
+	
+	# Basic movement
+	if Input.is_action_pressed(\"move_forward\"):
+		direction -= transform.basis.z
+	if Input.is_action_pressed(\"move_back\"):
+		direction += transform.basis.z
+	if Input.is_action_pressed(\"move_left\"):
+		direction -= transform.basis.x
+	if Input.is_action_pressed(\"move_right\"):
+		direction += transform.basis.x
+	if Input.is_action_pressed(\"move_jump\"):
+		direction += transform.basis.y
+		
+	direction = direction.normalized()
+	# Horizontal movment
+	var horizontal_velocity=speed*direction
+	velocity.x=horizontal_velocity.x
+	velocity.z=horizontal_velocity.z
+	
+	
+	# Gravity
+	if not is_on_floor():
+		velocity.y -= gravity*delta
+	else:
+		if Input.is_action_pressed(\"move_jump\"):
+			velocity.y = jump
+	move_and_slide()	
+func _handle_camera_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		rotate_y(deg_to_rad(-event.relative.x * 0.1))
+		# or call your custom camera pivot logic here
+
+	
+		
+	
+	
+"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xjj2m"]
 
@@ -9,7 +78,7 @@
 [node name="Node3D" type="Node3D"]
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-script = ExtResource("1_0cifh")
+script = SubResource("GDScript_lrol0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
